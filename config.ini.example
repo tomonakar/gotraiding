@@ -1,0 +1,6 @@
+[bitflyer]
+api_key = xxxxxxxxxxxxxx
+api_secret = xxxxxxxxxxx
+
+[gotrading]
+log_file = gotrading.log
