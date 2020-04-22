@@ -1,11 +1,14 @@
 package main
 
 import (
+	"app/bitflyer"
 	"app/config"
+	"app/utils"
 	"fmt"
 )
 
 func main() {
-	fmt.Println(config.Config.ApiKey)
-	fmt.Println(config.Config.ApiSecret)
+	utils.LoggingSettings(config.Config.LogFile)
+	apiClient := bitflyer.New(config.Config.ApiKey, config.Config.ApiSecret)
+	fmt.Println(apiClient.GetBalance())
 }
