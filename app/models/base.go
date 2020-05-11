@@ -1,9 +1,9 @@
 package models
 
 import (
-	"app/config"
 	"database/sql"
 	"fmt"
+	"app/config"
 	"log"
 	"time"
 
@@ -11,12 +11,12 @@ import (
 )
 
 const (
-	tableNameSignalEvent = "signal_events"
+	tableNameSignalEvents = "signal_events"
 )
 
 var DbConnection *sql.DB
 
-func getCandleTableName(productCode string, duration time.Duration) string {
+func GetCandleTableName(productCode string, duration time.Duration) string {
 	return fmt.Sprintf("%s_%s", productCode, duration)
 }
 
@@ -27,24 +27,24 @@ func init() {
 		log.Fatalln(err)
 	}
 	cmd := fmt.Sprintf(`
-		CREATE TABLE IF NOT EXISTS %s (
-			time DATETIME PRIMARY KEY NOT NULL,
-			product_code STRING,
-			side STRING,
-			price FLOAT,
-			size FLOAT)`, tableNameSignalEvent)
+        CREATE TABLE IF NOT EXISTS %s (
+            time DATETIME PRIMARY KEY NOT NULL,
+            product_code STRING,
+            side STRING,
+            price FLOAT,
+            size FLOAT)`, tableNameSignalEvents)
 	DbConnection.Exec(cmd)
 
 	for _, duration := range config.Config.Durations {
-		tableName := getCandleTableName(config.Config.ProductCode, duration)
+		tableName := GetCandleTableName(config.Config.ProductCode, duration)
 		c := fmt.Sprintf(`
-		CREATE TABLE IF NOT EXISTS %s (
-			time DATETIME PRIMARY KEY NOT NULL,
-			open FLOAT,
-			close FLOAT,
-			high FLOAT,
-			low FLOAT,
-			volume FLOAT`, tableName)
+            CREATE TABLE IF NOT EXISTS %s (
+            time DATETIME PRIMARY KEY NOT NULL,
+            open FLOAT,
+            close FLOAT,
+            high FLOAT,
+            low open FLOAT,
+			volume FLOAT)`, tableName)
 		DbConnection.Exec(c)
 	}
 }
