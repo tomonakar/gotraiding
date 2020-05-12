@@ -26,7 +26,7 @@ var Config ConfigList
 func init() {
 	cfg, err := ini.Load("config.ini")
 	if err != nil {
-		log.Printf("{Faild to read file: %v", err)
+		log.Printf("Failed to read file: %v", err)
 		os.Exit(1)
 	}
 
@@ -42,7 +42,7 @@ func init() {
 		LogFile:       cfg.Section("gotrading").Key("log_file").String(),
 		ProductCode:   cfg.Section("gotrading").Key("product_code").String(),
 		Durations:     durations,
-		TradeDuration: durations[cfg.Section("gotrating").Key("trade_duration").String()],
+		TradeDuration: durations[cfg.Section("gotrading").Key("trade_duration").String()],
 		DbName:        cfg.Section("db").Key("name").String(),
 		SQLDriver:     cfg.Section("db").Key("driver").String(),
 		Port:          cfg.Section("web").Key("port").MustInt(),

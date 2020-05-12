@@ -1,6 +1,7 @@
 package main
 
 import (
+	"app/app/controllers"
 	"app/app/models"
 	"app/config"
 	"app/utils"
@@ -10,6 +11,7 @@ import (
 func main() {
 	utils.LoggingSettings(config.Config.LogFile)
 	fmt.Println(models.DbConnection)
+	controllers.StreamIngestionData()
 }
 
 // tickerの確認
