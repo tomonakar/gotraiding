@@ -12,6 +12,7 @@ func main() {
 	utils.LoggingSettings(config.Config.LogFile)
 	fmt.Println(models.DbConnection)
 	controllers.StreamIngestionData()
+	controllers.StartWebServer()
 }
 
 // tickerの確認
