@@ -4,7 +4,6 @@ import (
 	"app/app/models"
 	"app/bitflyer"
 	"app/config"
-	"log"
 )
 
 func StreamIngestionData() {
@@ -13,7 +12,7 @@ func StreamIngestionData() {
 	go apiClient.GetRealTimeTicker(config.Config.ProductCode, tickerChannl)
 	go func() {
 		for ticker := range tickerChannl {
-			log.Printf("action=StreamIngestionData, %v", ticker)
+			// log.Printf("action=StreamIngestionData, %v", ticker)
 			for _, duration := range config.Config.Durations {
 				isCreated := models.CreateCandleWithDuration(ticker, ticker.ProductCode, duration)
 				if isCreated == true && duration == config.Config.TradeDuration {
